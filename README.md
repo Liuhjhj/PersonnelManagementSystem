@@ -1,2 +1,1 @@
-# PersonnelManagementSystem
-人事管理系统
+# 人事管理系统
