@@ -192,3 +192,38 @@
     -fx-background-color: rgb(58, 61, 73);
     -fx-padding: 30 10 10 10;
 }
+
+/**
+ *Tab通用样式
+ */
+.tab{
+    -fx-font-size: 14px;
+    -fx-background-color: white;
+    -fx-background-size: 15px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-insets: 100%;
+}
+.tab:hover{
+    -fx-background-color: #1a83e1;
+    -fx-text-fill: white;
+    -fx-color : #1a83e1;
+}
+.tab:selected{
+    -fx-background-color: #1a83e1;
+    -fx-text-fill: white;
+    -fx-color : #1a83e1;
+}
+
+/**
+ *TabPane通用样式
+ */
+.tab-pane > .tab-header-area > .tab-header-background {
+    -fx-background-color: #EBF0FA;
+    -fx-text-fill: white;
+}
+.table-pane{
+    -fx-background-color: #fff;
+}
+AnchorPane{
+    -fx-background-color:white;
+}
