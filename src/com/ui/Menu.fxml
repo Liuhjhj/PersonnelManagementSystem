@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="622.0" prefWidth="917.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <AnchorPane prefHeight="62.0" prefWidth="618.0" styleClass="green-theme" stylesheets="@Style.css" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="91.0" layoutY="80.0" prefHeight="0.0" prefWidth="135.0" stylesheets="@Style.css" text="人事管理系统" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="20.0">
+               <styleClass>
+                  <String fx:value="font-title" />
+                  <String fx:value="font-white" />
+               </styleClass>
+            </Label>
+            <Label prefHeight="23.0" prefWidth="28.0" styleClass="font-white" text="您好!" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="20.0" />
+            <Button mnemonicParsing="false" prefHeight="23.0" prefWidth="81.0" stylesheets="@Style.css" text="退出系统" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+               <styleClass>
+                  <String fx:value="btn-radius-large" />
+                  <String fx:value="blue-theme" />
+               </styleClass>
+            </Button>
+         </children>
+      </AnchorPane>
+   </top>
+   <center>
+      <SplitPane dividerPositions="0.19781420765027322" prefHeight="334.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="336.0" prefWidth="242.0" styleClass="dark-gray-theme" stylesheets="@Style.css">
+               <children>
+                  <Accordion prefHeight="336.0" prefWidth="181.0" styleClass="input-group" stylesheets="@Style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <panes>
+                      <TitledPane animated="false" text="员工基本资料与部门管理">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="dark-gray-theme" stylesheets="@Style.css" />
+                        </content>
+                      </TitledPane>
+                      <TitledPane animated="false" prefHeight="183.0" prefWidth="169.0" text="工资管理">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="dark-gray-theme" stylesheets="@Style.css" />
+                        </content>
+                      </TitledPane>
+                      <TitledPane animated="false" text="用户与系统管理">
+                           <content>
+                              <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" styleClass="dark-gray-theme" stylesheets="@Style.css">
+                                 <children>
+                                    <Button mnemonicParsing="false" prefWidth="100.0" styleClass="menu-btn" text="创建用户" VBox.vgrow="SOMETIMES" />
+                                    <Button mnemonicParsing="false" prefWidth="100.0" styleClass="menu-btn" text="修改密码" VBox.vgrow="SOMETIMES" />
+                                    <Button mnemonicParsing="false" prefWidth="100.0" styleClass="menu-btn" text="删除用户" VBox.vgrow="SOMETIMES" />
+                                 </children>
+                              </VBox>
+                           </content>
+                      </TitledPane>
+                    </panes>
+                  </Accordion>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="441.0" prefWidth="548.0" />
+        </items>
+      </SplitPane>
+   </center>
+</BorderPane>

@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="300.0" prefWidth="500.0" styleClass="default-theme" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ui.Login">
+<AnchorPane fx:id="rootLayout" prefHeight="300.0" prefWidth="500.0" styleClass="default-theme" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ui.Login">
    <children>
       <VBox alignment="CENTER" layoutX="101.0" layoutY="17.0" prefHeight="227.0" prefWidth="496.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -31,7 +31,7 @@
                         <String fx:value="btn-basic" />
                         <String fx:value="blue-theme" />
                      </styleClass></Button>
-                  <Button id="exit" fx:id="exit" mnemonicParsing="false" stylesheets="@Style.css" text="退出" HBox.hgrow="SOMETIMES">
+                  <Button id="exit" fx:id="exit" mnemonicParsing="false" onAction="#exitAction" stylesheets="@Style.css" text="退出" HBox.hgrow="SOMETIMES">
                      <styleClass>
                         <String fx:value="btn-basic" />
                         <String fx:value="blue-theme" />

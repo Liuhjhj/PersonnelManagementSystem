@@ -1,6 +1,5 @@
 package com;
 
-import com.ui.Login;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,8 +16,6 @@ public class Main extends Application {
             primaryStage.setTitle("人事管理系统");
             primaryStage.setScene(new Scene(root));
             primaryStage.setResizable(false);
-            Login login = new Login();
-            login.exitAction(root, primaryStage);
             primaryStage.show();
         }catch (IOException e){
             e.printStackTrace();
