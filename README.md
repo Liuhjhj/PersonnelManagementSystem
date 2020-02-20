@@ -2,7 +2,7 @@
 
 开发工具:
 
-1. Intellij Idea 
+1. Intellij Idea
 
    https://www.jetbrains.com/idea/
 
@@ -10,7 +10,8 @@
 
    https://www.oracle.com/technetwork/java/javase/downloads/javafxscenebuilder-info-2157684.html
 
-3. 云数据库:百度RDS  
+3. 云数据库:百度RDS
+
    https://cloud.baidu.com/product/rds.html
 
 说明:
