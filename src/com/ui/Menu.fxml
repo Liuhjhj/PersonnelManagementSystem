@@ -27,7 +27,7 @@
       </AnchorPane>
    </top>
    <center>
-      <SplitPane dividerPositions="0.2" prefHeight="334.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <SplitPane dividerPositions="0.2" prefHeight="334.0" prefWidth="600.0" stylesheets="@Style.css" BorderPane.alignment="CENTER">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="336.0" prefWidth="242.0" styleClass="dark-gray-theme" stylesheets="@Style.css">
                <children>
@@ -47,9 +47,9 @@
                            <content>
                               <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" styleClass="dark-gray-theme" stylesheets="@Style.css">
                                  <children>
-                                    <Button fx:id="createUser" mnemonicParsing="false" prefWidth="100.0" styleClass="menu-btn" text="创建用户" VBox.vgrow="SOMETIMES" />
-                                    <Button fx:id="modifyPassword" mnemonicParsing="false" prefWidth="100.0" styleClass="menu-btn" text="修改密码" VBox.vgrow="SOMETIMES" />
-                                    <Button fx:id="deleteUser" mnemonicParsing="false" prefWidth="100.0" styleClass="menu-btn" text="删除用户" VBox.vgrow="SOMETIMES" />
+                                    <Button fx:id="createUserBtn" mnemonicParsing="false" onAction="#createUserBtnAction" prefWidth="100.0" styleClass="menu-btn" text="创建用户" VBox.vgrow="SOMETIMES" />
+                                    <Button fx:id="modifyPasswordBtn" mnemonicParsing="false" onAction="#modifyPasswordBtnAction" prefWidth="100.0" styleClass="menu-btn" text="修改密码" VBox.vgrow="SOMETIMES" />
+                                    <Button fx:id="deleteUserBtn" mnemonicParsing="false" onAction="#deleteUserBtnAction" prefWidth="100.0" styleClass="menu-btn" text="删除用户" VBox.vgrow="SOMETIMES" />
                                  </children>
                               </VBox>
                            </content>
@@ -58,7 +58,7 @@
                   </Accordion>
                </children>
             </AnchorPane>
-            <TabPane prefHeight="200.0" prefWidth="200.0" stylesheets="@Style.css" tabClosingPolicy="UNAVAILABLE">
+            <TabPane fx:id="tabPane3" prefHeight="200.0" prefWidth="200.0" stylesheets="@Style.css" tabClosingPolicy="UNAVAILABLE">
               <tabs>
                 <Tab text="创建用户">
                      <content>
@@ -69,27 +69,39 @@
                                     <Label alignment="CENTER" prefHeight="15.0" prefWidth="147.0" styleClass="font-gray" text="请输入用户名和密码" />
                                     <HBox alignment="CENTER" prefHeight="30.0" prefWidth="729.0" spacing="10.0">
                                        <children>
-                                          <Label styleClass="font-gray" text="账户:" />
-                                          <TextField styleClass="default-theme" />
+                                          <Label styleClass="font-gray" text="用户名称:" />
+                                          <TextField fx:id="username" styleClass="default-theme" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="30.0" prefWidth="729.0" spacing="10.0">
                                        <children>
-                                          <Label styleClass="font-gray" text="密码:" />
-                                          <TextField styleClass="default-theme" />
+                                          <Label styleClass="font-gray" text="用户密码:" />
+                                          <PasswordField fx:id="password" styleClass="default-theme" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="30.0" prefWidth="732.0" spacing="10.0">
+                                       <children>
+                                          <Label styleClass="font-gray" text="确认密码:" />
+                                          <PasswordField fx:id="password2" styleClass="default-theme" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="30.0" prefWidth="729.0" spacing="20.0">
                                        <children>
-                                          <Button mnemonicParsing="false" text="创建">
+                                          <Button fx:id="createAdmin" mnemonicParsing="false" onAction="#createAdminAction" text="创建管理员">
                                              <styleClass>
                                                 <String fx:value="btn-basic" />
                                                 <String fx:value="warning-theme" />
                                              </styleClass>
                                           </Button>
-                                          <Button mnemonicParsing="false" text="重置">
+                                          <Button fx:id="createUser" mnemonicParsing="false" onAction="#createUserAction" text="创建普通用户">
                                              <styleClass>
-                                                <String fx:value="blue-theme" />
+                                                <String fx:value="btn-basic" />
+                                                <String fx:value="warm-theme" />
+                                             </styleClass>
+                                          </Button>
+                                          <Button fx:id="reset" mnemonicParsing="false" onAction="#resetAction" text="重置">
+                                             <styleClass>
+                                                <String fx:value="gray-theme" />
                                                 <String fx:value="btn-basic" />
                                              </styleClass>
                                           </Button>
@@ -103,7 +115,48 @@
                 </Tab>
                 <Tab text="密码修改">
                   <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox alignment="CENTER" layoutY="6.0" prefHeight="527.0" prefWidth="732.0" spacing="10.0" AnchorPane.bottomAnchor="-6.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="6.0">
+                                 <children>
+                                    <Label styleClass="font-gray" text="密码修改" />
+                                    <HBox alignment="CENTER" prefHeight="30.0" prefWidth="732.0" spacing="10.0">
+                                       <children>
+                                          <Label styleClass="font-gray" text="请输入原密码:" />
+                                          <PasswordField styleClass="default-theme" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="30.0" prefWidth="732.0" spacing="10.0">
+                                       <children>
+                                          <Label styleClass="font-gray" text="请输入新密码:" />
+                                          <PasswordField styleClass="default-theme" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="30.0" prefWidth="732.0" spacing="10.0">
+                                       <children>
+                                          <Label styleClass="font-gray" text="再输入新密码:" />
+                                          <PasswordField styleClass="default-theme" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="30.0" prefWidth="732.0" spacing="20.0">
+                                       <children>
+                                          <Button mnemonicParsing="false" text="确认修改">
+                                             <styleClass>
+                                                <String fx:value="btn-basic" />
+                                                <String fx:value="blue-theme" />
+                                             </styleClass>
+                                          </Button>
+                                          <Button fx:id="reset2" mnemonicParsing="false" onAction="#reset2Action" text="重置">
+                                             <styleClass>
+                                                <String fx:value="btn-basic" />
+                                                <String fx:value="gray-theme" />
+                                             </styleClass>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children></AnchorPane>
                   </content>
                 </Tab>
                   <Tab text="用户删除">

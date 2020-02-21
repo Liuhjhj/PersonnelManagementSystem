@@ -227,3 +227,7 @@
 AnchorPane{
     -fx-background-color:white;
 }
+
+.split-pane *.split-pane-divider {
+    -fx-padding: 0 0 0 0; /* 0 3 0 3 */
+}

@@ -42,11 +42,7 @@ public class Login implements Initializable{
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
 
-
-
     public void exitAction(ActionEvent actionEvent) {
-        if (primaryStage == null)
-            primaryStage = (Stage)rootLayout.getScene().getWindow();
         primaryStage.close();
     }
 
@@ -57,29 +53,31 @@ public class Login implements Initializable{
     }
 
     public void loginDatabase(){
-        Connection connection = Sql.connect(username.getText(), password.getText());
+        Connection connection = Sql.getConnection(username.getText(), password.getText());
         if (connection != null){
-            System.out.println("SQL Database Connected!");
             Sql.disconnect(connection);
             String[] info = {username.getText(), password.getText()};
             try {
                 Stage stage = new Stage();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/ui/Menu.fxml"));
                 Parent parent = loader.load();
-                Menu menu = loader.getController();
-                menu.userLabel.setText("尊敬的"+username.getText()+", 您好!");
                 stage.setScene(new Scene(parent));
                 stage.setTitle("人事管理系统");
                 stage.setUserData(info);
+                stage.setResizable(false);
+                Menu menu = loader.getController();
+                menu.init();
                 stage.show();
-                if (primaryStage == null)
-                    primaryStage = (Stage)rootLayout.getScene().getWindow();
                 primaryStage.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }else {
-            AlertDiaog.alert("登录数据库失败", "用户名或密码错误");
+            AlertDiaog.alert(0, "登录数据库失败", "用户名或密码错误");
         }
+    }
+
+    public void init(){
+        primaryStage = (Stage)rootLayout.getScene().getWindow();
     }
 }
