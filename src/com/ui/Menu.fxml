@@ -122,25 +122,22 @@
                                     <Label styleClass="font-gray" text="密码修改" />
                                     <HBox alignment="CENTER" prefHeight="30.0" prefWidth="732.0" spacing="10.0">
                                        <children>
-                                          <Label styleClass="font-gray" text="请输入原密码:" />
-                                          <PasswordField styleClass="default-theme" />
+                                          <PasswordField fx:id="oldPassword" promptText="请输入原密码" styleClass="default-theme" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="30.0" prefWidth="732.0" spacing="10.0">
                                        <children>
-                                          <Label styleClass="font-gray" text="请输入新密码:" />
-                                          <PasswordField styleClass="default-theme" />
+                                          <PasswordField fx:id="newPassword" promptText="请输入新密码" styleClass="default-theme" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="30.0" prefWidth="732.0" spacing="10.0">
                                        <children>
-                                          <Label styleClass="font-gray" text="再输入新密码:" />
-                                          <PasswordField styleClass="default-theme" />
+                                          <PasswordField fx:id="newPassword2" promptText="再次输入新密码" styleClass="default-theme" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="30.0" prefWidth="732.0" spacing="20.0">
                                        <children>
-                                          <Button mnemonicParsing="false" text="确认修改">
+                                          <Button fx:id="confirmChange" mnemonicParsing="false" onAction="#confirmAction" text="确认修改">
                                              <styleClass>
                                                 <String fx:value="btn-basic" />
                                                 <String fx:value="blue-theme" />

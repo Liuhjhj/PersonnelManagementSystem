@@ -85,4 +85,16 @@ import java.sql.*;
             }
             return false;
         }
+
+        public static boolean changePassword(Statement statement, String username, String newPassword){
+            try {
+                String sql = "SET PASSWORD FOR '"+username+"'@'%' = PASSWORD('"+newPassword+"');";
+                System.out.println(sql);
+                statement.execute(sql);
+                return true;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
     }
