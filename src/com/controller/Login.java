@@ -1,21 +1,16 @@
-package com.ui;
+package com.controller;
 
 import com.Sql;
-import javafx.application.Application;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -59,7 +54,7 @@ public class Login implements Initializable{
             String[] info = {username.getText(), password.getText()};
             try {
                 Stage stage = new Stage();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/ui/Menu.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/fxml/Menu.fxml"));
                 Parent parent = loader.load();
                 stage.setScene(new Scene(parent));
                 stage.setTitle("人事管理系统");
@@ -79,5 +74,6 @@ public class Login implements Initializable{
 
     public void init(){
         primaryStage = (Stage)rootLayout.getScene().getWindow();
+
     }
 }

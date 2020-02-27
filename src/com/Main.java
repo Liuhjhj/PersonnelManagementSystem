@@ -1,6 +1,6 @@
 package com;
 
-import com.ui.Login;
+import com.controller.Login;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,7 +12,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/ui/Login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/fxml/Login.fxml"));
             Parent root = loader.load();
             primaryStage.setScene(new Scene(root));
             primaryStage.setTitle("人事管理系统");

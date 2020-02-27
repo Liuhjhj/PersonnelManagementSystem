@@ -1,4 +1,4 @@
-package com.ui;
+package com.controller;
 
 import com.Sql;
 import javafx.event.ActionEvent;
@@ -40,13 +40,14 @@ public class Menu implements Initializable {
         primaryStage = (Stage) rootLayout.getScene().getWindow();   //获取本窗口的Stage实例
         info = (String[]) primaryStage.getUserData();   //info保存登录进来的用户名和密码
         userLabel.setText("尊敬的"+info[0]+", 您好!");
+        tabPane3.setVisible(false);
     }
 
     //退出系统按钮,返回主菜单
     public void exitAction(ActionEvent actionEvent) {
         try {
             Stage stage = new Stage();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/ui/Login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/fxml/Login.fxml"));
             Parent parent = loader.load();
             stage.setScene(new Scene(parent));
             Login login = loader.getController();
@@ -63,16 +64,19 @@ public class Menu implements Initializable {
 
     //左侧菜单栏创建用户按钮
     public void createUserBtnAction(ActionEvent actionEvent) {
+        setTabPane3Visible();
         singleSelectionModel.select(0);
     }
 
     //左侧菜单栏修改密码按钮
     public void modifyPasswordBtnAction(ActionEvent actionEvent) {
+        setTabPane3Visible();
         singleSelectionModel.select(1);
     }
 
     //左侧菜单栏删除用户按钮
     public void deleteUserBtnAction(ActionEvent actionEvent) {
+        setTabPane3Visible();
         singleSelectionModel.select(2);
     }
 
@@ -185,6 +189,12 @@ public class Menu implements Initializable {
             }
         }else {
             AlertDiaog.alert(0, "错误", "有空值或两次输入的密码不匹配");
+        }
+    }
+
+    public void setTabPane3Visible(){
+        if (!tabPane3.isVisible()) {
+            tabPane3.setVisible(true);
         }
     }
 }
