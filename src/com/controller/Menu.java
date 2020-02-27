@@ -1,6 +1,10 @@
 package com.controller;
 
+import com.AlertDiaog;
 import com.Sql;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -11,8 +15,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Menu implements Initializable {
 
@@ -26,9 +34,14 @@ public class Menu implements Initializable {
     public PasswordField oldPassword;
     public PasswordField newPassword;
     public PasswordField newPassword2;
+    public ChoiceBox selectUser;
+    public Button dropBtn;
+    public int dropBtnStatus = 0;
     public Stage primaryStage;
     public SingleSelectionModel singleSelectionModel;
     public String[] info;
+    public Connection connection;
+    public Statement statement;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -37,6 +50,14 @@ public class Menu implements Initializable {
     //初始化
     public void init(){
         singleSelectionModel = tabPane3.getSelectionModel();
+        singleSelectionModel.selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+                dropBtn.setText("检索所有用户");
+                dropBtn.setStyle("-fx-background-color: rgb(30, 158, 255); -fx-text-fill: #fff;");
+                dropBtnStatus = 0;
+            }
+        });
         primaryStage = (Stage) rootLayout.getScene().getWindow();   //获取本窗口的Stage实例
         info = (String[]) primaryStage.getUserData();   //info保存登录进来的用户名和密码
         userLabel.setText("尊敬的"+info[0]+", 您好!");
@@ -98,17 +119,8 @@ public class Menu implements Initializable {
     public void createUserAction(ActionEvent actionEvent) {
         //用户名,密码均不为空且输入的两个密码的值相等
         if (verifyText(username.getText(), password.getText(), password2.getText())){
-            Connection connection;
-            Statement statement;
-            try {   //连接数据库
-                connection = Sql.getConnection(info[0], info[1]);
-                assert connection != null;
-                statement = connection.createStatement();
-            }catch (Exception e){
-                e.printStackTrace();
-                AlertDiaog.alert(0, "错误", "创建用户失败", "连接数据库失败");
-                return;
-            }
+            connection = Sql.connect(info[0], info[1]);
+            statement = Sql.getStatement(connection);
             if (!Sql.createUser(statement, username.getText(), password.getText())) {   //创建用户失败,已存在该用户名的用户
                 AlertDiaog.alert(0, "错误", "创建用户失败", "你没有权限,用户已存在或密码格式不正确");
                 return;
@@ -124,17 +136,8 @@ public class Menu implements Initializable {
     //右侧创建用户页创建管理员按钮
     public void createAdminAction(ActionEvent actionEvent) {
         if (verifyText(username.getText(), password.getText(), password2.getText())) {
-            Connection connection;
-            Statement statement;
-            try {
-                connection = Sql.getConnection(info[0], info[1]);
-                assert connection != null;
-                statement = connection.createStatement();
-            } catch (Exception e) {
-                e.printStackTrace();
-                AlertDiaog.alert(0, "错误", "创建管理员失败", "连接数据库失败");
-                return;
-            }
+            connection = Sql.connect(info[0], info[1]);
+            statement = Sql.getStatement(connection);
             boolean bool = false;   //判断该用户是否存在,若不存在则创建用户
             if (Sql.createUser(statement, username.getText(), password.getText())) {
                 bool = true;
@@ -167,17 +170,8 @@ public class Menu implements Initializable {
     public void confirmAction(ActionEvent actionEvent) {
         if (verifyText(oldPassword.getText(), newPassword.getText(), newPassword2.getText())){
             if (oldPassword.getText().equals(info[1])){   //原密码匹配
-                Connection connection;
-                Statement statement;
-                try{
-                    connection = Sql.getConnection(info[0], info[1]);
-                    assert connection != null;
-                    statement = connection.createStatement();
-                }catch (Exception e){
-                    e.printStackTrace();
-                    AlertDiaog.alert(0, "错误", "连接数据库失败");
-                    return;
-                }
+                connection = Sql.connect(info[0], info[1]);
+                statement = Sql.getStatement(connection);
                 if (Sql.changePassword(statement, info[0], newPassword.getText())){
                     AlertDiaog.alert(3, "成功", "密码修改成功");
                 }else {
@@ -195,6 +189,49 @@ public class Menu implements Initializable {
     public void setTabPane3Visible(){
         if (!tabPane3.isVisible()) {
             tabPane3.setVisible(true);
+        }
+    }
+
+    //删除用户按钮
+    public void dropBtnAction(ActionEvent actionEvent) {
+        try {
+            if (dropBtnStatus == 0) {   //当dropBtnStatus为0时,按钮为蓝色;为1时按钮为红色
+                connection = Sql.connect(info[0], info[1]);
+                statement = Sql.getStatement(connection);
+                dropBtnStatus = 1;
+                dropBtn.setText("删除这个用户");
+                dropBtn.setStyle("-fx-background-color: rgb(254, 87, 34); -fx-text-fill: #fff;");
+                String sql = "SELECT USER FROM mysql.user;";
+                ResultSet resultSet = Sql.query(statement, sql);
+                ArrayList<String> users = new ArrayList<>();
+                while (resultSet.next()) {
+                    String user = resultSet.getString("user");
+                    Pattern pattern = Pattern.compile("_sync|root|_root");
+                    Matcher matcher = pattern.matcher(user);
+                    if (!matcher.matches())
+                        users.add(user);
+                }
+                selectUser.setItems(FXCollections.observableArrayList(users));
+                Sql.disconnect(connection);
+            }else if (dropBtnStatus == 1){
+                if (selectUser.getValue() == null){
+                    AlertDiaog.alert(0, "错误", "你没有选中任何用户");
+                }else{
+                    connection = Sql.connect(info[0], info[1]);
+                    statement = Sql.getStatement(connection);
+                    String sql = "DROP USER '" + selectUser.getValue() +"';";
+                    if (Sql.operate(statement, sql))
+                        AlertDiaog.alert(3, "成功", "成功删除用户");
+                    else
+                        AlertDiaog.alert(0, "失败", "删除用户失败", "用户已不存在或你没有权限");
+                    dropBtn.setText("检索所有用户");
+                    dropBtn.setStyle("-fx-background-color: rgb(30, 158, 255); -fx-text-fill: #fff;");
+                    dropBtnStatus = 0;
+                    Sql.disconnect(connection);
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 }

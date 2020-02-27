@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.AlertDiaog;
 import com.Sql;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +18,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class Login implements Initializable{
@@ -48,11 +50,11 @@ public class Login implements Initializable{
     }
 
     public void loginDatabase(){
-        Connection connection = Sql.getConnection(username.getText(), password.getText());
-        if (connection != null){
-            Sql.disconnect(connection);
-            String[] info = {username.getText(), password.getText()};
-            try {
+        try {
+            Connection connection = Sql.connect(username.getText(), password.getText());
+            if (connection != null) {
+                Sql.disconnect(connection);
+                String[] info = {username.getText(), password.getText()};
                 Stage stage = new Stage();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/fxml/Menu.fxml"));
                 Parent parent = loader.load();
@@ -64,11 +66,11 @@ public class Login implements Initializable{
                 menu.init();
                 stage.show();
                 primaryStage.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+            } else {
+                AlertDiaog.alert(0, "登录数据库失败", "用户名或密码错误");
             }
-        }else {
-            AlertDiaog.alert(0, "登录数据库失败", "用户名或密码错误");
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 
