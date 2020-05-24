@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:id="rootLayout" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="622.0" prefWidth="917.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controller.Menu">
+   <top>
+      <AnchorPane prefHeight="64.0" prefWidth="618.0" styleClass="green-theme" stylesheets="@Style.css" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="72.0" layoutY="20.0" prefHeight="0.0" prefWidth="135.0" styleClass="font-white" stylesheets="@Style.css" text="人事管理系统" AnchorPane.leftAnchor="72.0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="userLabel" alignment="CENTER_RIGHT" layoutX="600.0" layoutY="21.0" prefHeight="23.0" prefWidth="199.0" styleClass="font-white" text="您好!" AnchorPane.rightAnchor="118.0" AnchorPane.topAnchor="21.0" />
+            <JFXButton fx:id="exit" layoutX="827.0" layoutY="17.0" prefHeight="32.0" prefWidth="80.0" styleClass="blue-theme" text="退出系统" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="16.0">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </JFXButton>
+            <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="14.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="14.0">
+               <image>
+                  <Image url="@../../sketch/管理.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </top>
+   <center>
+      <SplitPane dividerPositions="0.2" prefHeight="334.0" prefWidth="600.0" stylesheets="@Style.css" BorderPane.alignment="CENTER">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="336.0" prefWidth="242.0" styleClass="dark-gray-theme" stylesheets="@Style.css">
+               <children>
+                  <Accordion prefHeight="336.0" prefWidth="181.0" styleClass="input-group" stylesheets="@Style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <panes>
+                      <TitledPane animated="false" text="员工管理">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="dark-gray-theme" stylesheets="@Style.css" />
+                        </content>
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                      </TitledPane>
+                        <TitledPane animated="false" text="部门管理">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="dark-gray-theme" />
+                          </content>
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </TitledPane>
+                      <TitledPane animated="false" prefHeight="183.0" prefWidth="169.0" text="工资管理">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="dark-gray-theme" stylesheets="@Style.css" />
+                        </content>
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                      </TitledPane>
+                      <TitledPane animated="false" text="用户与系统管理">
+                           <content>
+                              <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" styleClass="dark-gray-theme" stylesheets="@Style.css">
+                                 <children>
+                                    <JFXButton fx:id="createUserBtn" prefHeight="32.0" prefWidth="144.0" styleClass="menu-btn" text="创建用户">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </JFXButton>
+                                    <JFXButton fx:id="modifyPasswordBtn" styleClass="menu-btn" text="密码修改">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </JFXButton>
+                                    <JFXButton fx:id="deleteUserBtn" styleClass="menu-btn" text="用户删除">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </JFXButton>
+                                 </children>
+                              </VBox>
+                           </content>
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                      </TitledPane>
+                    </panes>
+                  </Accordion>
+               </children>
+            </AnchorPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0">
+               <children>
+                  <BorderPane fx:id="createUser" prefHeight="200.0" prefWidth="200.0" visible="false">
+                     <center>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../sketch/添加用户.png" />
+                                 </image>
+                              </ImageView>
+                              <HBox alignment="CENTER" prefHeight="32.0" prefWidth="732.0" spacing="10.0">
+                                 <children>
+                                    <Label prefHeight="24.0" prefWidth="64.0" text="用户名称:">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <JFXTextField fx:id="username" focusColor="#609adc" prefHeight="24.0" prefWidth="160.0" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="32.0" prefWidth="732.0" spacing="10.0">
+                                 <children>
+                                    <Label prefHeight="24.0" prefWidth="64.0" text="用户密码:">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <JFXPasswordField fx:id="password" focusColor="#11be73" prefHeight="24.0" prefWidth="160.0" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="32.0" prefWidth="732.0" spacing="10.0">
+                                 <children>
+                                    <Label prefHeight="24.0" prefWidth="64.0" text="确认密码:">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <JFXPasswordField fx:id="password2" focusColor="#11be73" prefHeight="24.0" prefWidth="160.0" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="32.0" prefWidth="732.0" spacing="20.0">
+                                 <children>
+                                    <JFXButton fx:id="createAdmin" prefHeight="32.0" prefWidth="104.0" text="创建管理员">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                       <styleClass>
+                                          <String fx:value="btn-basic" />
+                                          <String fx:value="warning-theme" />
+                                       </styleClass>
+                                    </JFXButton>
+                                    <JFXButton fx:id="createUser" prefHeight="32.0" prefWidth="104.0" text="创建用户">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                       <styleClass>
+                                          <String fx:value="btn-basic" />
+                                          <String fx:value="warm-theme" />
+                                       </styleClass>
+                                    </JFXButton>
+                                    <JFXButton fx:id="reset" prefHeight="32.0" prefWidth="64.0" text="重置">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                       <styleClass>
+                                          <String fx:value="btn-basic" />
+                                          <String fx:value="gray-theme" />
+                                       </styleClass>
+                                    </JFXButton>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </center>
+                  </BorderPane>
+                  <AnchorPane fx:id="modifyPassword" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" visible="false">
+                     <children>
+                        <VBox alignment="CENTER" layoutY="6.0" prefHeight="527.0" prefWidth="732.0" spacing="10.0" AnchorPane.bottomAnchor="-6.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="6.0">
+                           <children>
+                              <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../sketch/修改密码.png" />
+                                 </image>
+                              </ImageView>
+                              <HBox alignment="CENTER" prefHeight="32.0" prefWidth="732.0" spacing="10.0">
+                                 <children>
+                                    <JFXPasswordField fx:id="oldPassword" focusColor="#2a80d5" prefHeight="24.0" prefWidth="160.0" promptText="请输入原密码" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="32.0" prefWidth="732.0" spacing="10.0">
+                                 <children>
+                                    <JFXPasswordField fx:id="newPassword" focusColor="#c12f37" prefHeight="24.0" prefWidth="160.0" promptText="请输入新密码" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="32.0" prefWidth="732.0" spacing="10.0">
+                                 <children>
+                                    <JFXPasswordField fx:id="newPassword2" focusColor="#c12f37" prefHeight="24.0" prefWidth="160.0" promptText="请再次输入新密码" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="32.0" prefWidth="732.0" spacing="20.0">
+                                 <children>
+                                    <JFXButton fx:id="confirmChange" prefHeight="32.0" prefWidth="88.0" text="确认修改">
+                                       <styleClass>
+                                          <String fx:value="btn-basic" />
+                                          <String fx:value="green-theme" />
+                                       </styleClass>
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </JFXButton>
+                                    <JFXButton fx:id="reset2" prefHeight="32.0" prefWidth="64.0" text="重置">
+                                       <styleClass>
+                                          <String fx:value="btn-basic" />
+                                          <String fx:value="green-theme" />
+                                       </styleClass>
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </JFXButton>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="dropUser" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" visible="false">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="527.0" prefWidth="732.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../sketch/删除用户.png" />
+                                 </image>
+                              </ImageView>
+                              <JFXComboBox fx:id="selectUser" focusColor="#4b8bf4" prefHeight="32.0" prefWidth="232.0" />
+                              <JFXButton fx:id="dropBtn" prefHeight="32.0" prefWidth="72.0" styleClass="gray-theme" text="检索用户">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </JFXButton>
+                           </children>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </StackPane>
+        </items>
+      </SplitPane>
+   </center>
+</BorderPane>
