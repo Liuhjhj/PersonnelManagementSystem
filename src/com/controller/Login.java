@@ -10,15 +10,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class Login implements Initializable{
@@ -56,12 +54,13 @@ public class Login implements Initializable{
                 Sql.disconnect(connection);
                 String[] info = {username.getText(), password.getText()};
                 Stage stage = new Stage();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/fxml/Menu.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/fxml/Menu_MD.fxml"));
                 Parent parent = loader.load();
                 stage.setScene(new Scene(parent));
                 stage.setTitle("人事管理系统");
                 stage.setUserData(info);
                 stage.setResizable(false);
+                stage.getIcons().add(new Image(getClass().getResourceAsStream("/sketch/管理_24.png")));
                 Menu menu = loader.getController();
                 menu.init();
                 stage.show();
@@ -76,6 +75,5 @@ public class Login implements Initializable{
 
     public void init(){
         primaryStage = (Stage)rootLayout.getScene().getWindow();
-
     }
 }

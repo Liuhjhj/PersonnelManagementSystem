@@ -1,28 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import java.lang.String?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="rootLayout" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="622.0" prefWidth="917.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controller.Menu">
+<BorderPane fx:id="rootLayout" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="896.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controller.Menu">
    <top>
-      <AnchorPane prefHeight="62.0" prefWidth="618.0" styleClass="green-theme" stylesheets="@Style.css" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="64.0" prefWidth="618.0" styleClass="green-theme" stylesheets="@Style.css" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="91.0" layoutY="80.0" prefHeight="0.0" prefWidth="135.0" stylesheets="@Style.css" text="人事管理系统" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="20.0">
-               <styleClass>
-                  <String fx:value="font-title" />
-                  <String fx:value="font-white" />
-               </styleClass>
+            <Label layoutX="72.0" layoutY="20.0" prefHeight="0.0" prefWidth="135.0" styleClass="font-white" stylesheets="@Style.css" text="人事管理系统" AnchorPane.leftAnchor="72.0">
+               <font>
+                  <Font size="20.0" />
+               </font>
             </Label>
-            <Label fx:id="userLabel" alignment="CENTER_RIGHT" prefHeight="23.0" prefWidth="199.0" styleClass="font-white" text="您好!" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="20.0" />
-            <Button fx:id="exit" focusTraversable="false" mnemonicParsing="false" onAction="#exitAction" prefHeight="23.0" prefWidth="81.0" stylesheets="@Style.css" text="退出系统" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
-               <styleClass>
-                  <String fx:value="btn-radius-large" />
-                  <String fx:value="blue-theme" />
-               </styleClass>
-            </Button>
+            <Label fx:id="userLabel" alignment="CENTER_RIGHT" layoutX="600.0" layoutY="21.0" prefHeight="23.0" prefWidth="199.0" styleClass="font-white" text="您好!" AnchorPane.rightAnchor="118.0" AnchorPane.topAnchor="21.0" />
+            <JFXButton fx:id="exit" layoutX="827.0" layoutY="17.0" onAction="#exitAction" prefHeight="32.0" prefWidth="80.0" styleClass="blue-theme" text="退出系统" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="16.0">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </JFXButton>
+            <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="14.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="14.0">
+               <image>
+                  <Image url="@../../sketch/管理.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </top>
@@ -31,28 +50,86 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="336.0" prefWidth="242.0" styleClass="dark-gray-theme" stylesheets="@Style.css">
                <children>
-                  <Accordion prefHeight="336.0" prefWidth="181.0" styleClass="input-group" stylesheets="@Style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <Accordion prefHeight="556.0" prefWidth="184.0" styleClass="input-group" stylesheets="@Style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-5.0" AnchorPane.topAnchor="0.0">
                     <panes>
-                      <TitledPane animated="false" text="员工基本资料与部门管理">
-                        <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="dark-gray-theme" stylesheets="@Style.css" />
-                        </content>
-                      </TitledPane>
-                      <TitledPane animated="false" prefHeight="183.0" prefWidth="169.0" text="工资管理">
-                        <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="dark-gray-theme" stylesheets="@Style.css" />
-                        </content>
-                      </TitledPane>
-                      <TitledPane animated="false" text="用户与系统管理">
+                      <TitledPane animated="false" text="员工管理">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
                            <content>
-                              <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" styleClass="dark-gray-theme" stylesheets="@Style.css">
+                              <VBox prefHeight="200.0" prefWidth="100.0" spacing="8.0" styleClass="dark-gray-theme">
                                  <children>
-                                    <Button fx:id="createUserBtn" mnemonicParsing="false" onAction="#createUserBtnAction" prefWidth="100.0" styleClass="menu-btn" text="创建用户" VBox.vgrow="SOMETIMES" />
-                                    <Button fx:id="modifyPasswordBtn" mnemonicParsing="false" onAction="#modifyPasswordBtnAction" prefWidth="100.0" styleClass="menu-btn" text="修改密码" VBox.vgrow="SOMETIMES" />
-                                    <Button fx:id="deleteUserBtn" mnemonicParsing="false" onAction="#deleteUserBtnAction" prefWidth="100.0" styleClass="menu-btn" text="删除用户" VBox.vgrow="SOMETIMES" />
+                                    <JFXButton fx:id="userManageBtn" onAction="#userManageBtnAction" prefHeight="32.0" prefWidth="144.0" styleClass="menu-btn" text="员工管理">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </JFXButton>
                                  </children>
                               </VBox>
                            </content>
+                      </TitledPane>
+                        <TitledPane animated="false" text="部门管理">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <content>
+                              <VBox prefHeight="200.0" prefWidth="100.0" styleClass="dark-gray-theme">
+                                 <children>
+                                    <JFXButton fx:id="departmentBtn" onAction="#departmentBtnAction" prefHeight="32.0" prefWidth="144.0" styleClass="menu-btn" text="部门管理">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </JFXButton>
+                                 </children>
+                              </VBox>
+                           </content>
+                        </TitledPane>
+                      <TitledPane animated="false" prefHeight="183.0" prefWidth="169.0" text="工资管理">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <content>
+                              <VBox prefHeight="200.0" prefWidth="100.0" spacing="8.0" styleClass="dark-gray-theme">
+                                 <children>
+                                    <JFXButton fx:id="salaryBtn" onAction="#salaryBtnAction" prefHeight="32.0" prefWidth="144.0" styleClass="menu-btn" text="工资管理">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </JFXButton>
+                                    <JFXButton fx:id="attendanceBtn" onAction="#attendanceBtnAction" prefHeight="32.0" prefWidth="144.0" styleClass="menu-btn" text="考勤管理">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </JFXButton>
+                                 </children>
+                              </VBox>
+                           </content>
+                      </TitledPane>
+                      <TitledPane animated="false" text="用户与系统管理">
+                           <content>
+                              <VBox prefHeight="200.0" prefWidth="100.0" spacing="8.0" styleClass="dark-gray-theme" stylesheets="@Style.css">
+                                 <children>
+                                    <JFXButton fx:id="createUserBtn" onAction="#createUserBtnAction" prefHeight="32.0" prefWidth="144.0" styleClass="menu-btn" text="创建用户">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </JFXButton>
+                                    <JFXButton fx:id="modifyPasswordBtn" onAction="#modifyPasswordBtnAction" styleClass="menu-btn" text="密码修改">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </JFXButton>
+                                    <JFXButton fx:id="deleteUserBtn" onAction="#deleteUserBtnAction" styleClass="menu-btn" text="用户删除">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </JFXButton>
+                                 </children>
+                              </VBox>
+                           </content>
+                           <font>
+                              <Font size="15.0" />
+                           </font>
                       </TitledPane>
                     </panes>
                   </Accordion>
@@ -60,121 +137,362 @@
             </AnchorPane>
             <StackPane prefHeight="150.0" prefWidth="200.0">
                <children>
-                  <TabPane fx:id="tabPane3" prefHeight="200.0" prefWidth="200.0" stylesheets="@Style.css" tabClosingPolicy="UNAVAILABLE">
-                    <tabs>
-                      <Tab text="创建用户">
-                           <content>
-                              <BorderPane prefHeight="200.0" prefWidth="200.0">
-                                 <center>
-                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
-                                       <children>
-                                          <Label alignment="CENTER" prefHeight="15.0" prefWidth="147.0" styleClass="font-gray" text="请输入用户名和密码" />
-                                          <HBox alignment="CENTER" prefHeight="30.0" prefWidth="729.0" spacing="10.0">
-                                             <children>
-                                                <Label styleClass="font-gray" text="用户名称:" />
-                                                <TextField fx:id="username" styleClass="default-theme" />
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER" prefHeight="30.0" prefWidth="729.0" spacing="10.0">
-                                             <children>
-                                                <Label styleClass="font-gray" text="用户密码:" />
-                                                <PasswordField fx:id="password" styleClass="default-theme" />
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER" prefHeight="30.0" prefWidth="732.0" spacing="10.0">
-                                             <children>
-                                                <Label styleClass="font-gray" text="确认密码:" />
-                                                <PasswordField fx:id="password2" styleClass="default-theme" />
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER" prefHeight="30.0" prefWidth="729.0" spacing="20.0">
-                                             <children>
-                                                <Button fx:id="createAdmin" mnemonicParsing="false" onAction="#createAdminAction" text="创建管理员">
-                                                   <styleClass>
-                                                      <String fx:value="btn-basic" />
-                                                      <String fx:value="warning-theme" />
-                                                   </styleClass>
-                                                </Button>
-                                                <Button fx:id="createUser" mnemonicParsing="false" onAction="#createUserAction" text="创建普通用户">
-                                                   <styleClass>
-                                                      <String fx:value="btn-basic" />
-                                                      <String fx:value="warm-theme" />
-                                                   </styleClass>
-                                                </Button>
-                                                <Button fx:id="reset" mnemonicParsing="false" onAction="#resetAction" text="重置">
-                                                   <styleClass>
-                                                      <String fx:value="gray-theme" />
-                                                      <String fx:value="btn-basic" />
-                                                   </styleClass>
-                                                </Button>
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </VBox>
-                                 </center>
-                              </BorderPane>
-                           </content>
-                      </Tab>
-                      <Tab text="密码修改">
-                        <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                 <children>
-                                    <VBox alignment="CENTER" layoutY="6.0" prefHeight="527.0" prefWidth="732.0" spacing="10.0" AnchorPane.bottomAnchor="-6.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="6.0">
-                                       <children>
-                                          <Label styleClass="font-gray" text="密码修改" />
-                                          <HBox alignment="CENTER" prefHeight="30.0" prefWidth="732.0" spacing="10.0">
-                                             <children>
-                                                <PasswordField fx:id="oldPassword" promptText="请输入原密码" styleClass="default-theme" />
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER" prefHeight="30.0" prefWidth="732.0" spacing="10.0">
-                                             <children>
-                                                <PasswordField fx:id="newPassword" promptText="请输入新密码" styleClass="default-theme" />
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER" prefHeight="30.0" prefWidth="732.0" spacing="10.0">
-                                             <children>
-                                                <PasswordField fx:id="newPassword2" promptText="再次输入新密码" styleClass="default-theme" />
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER" prefHeight="30.0" prefWidth="732.0" spacing="20.0">
-                                             <children>
-                                                <Button fx:id="confirmChange" mnemonicParsing="false" onAction="#confirmAction" text="确认修改">
-                                                   <styleClass>
-                                                      <String fx:value="btn-basic" />
-                                                      <String fx:value="blue-theme" />
-                                                   </styleClass>
-                                                </Button>
-                                                <Button fx:id="reset2" mnemonicParsing="false" onAction="#reset2Action" text="重置">
-                                                   <styleClass>
-                                                      <String fx:value="btn-basic" />
-                                                      <String fx:value="gray-theme" />
-                                                   </styleClass>
-                                                </Button>
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </VBox>
-                                 </children>
-                              </AnchorPane>
-                        </content>
-                      </Tab>
-                        <Tab text="用户删除">
-                          <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                 <children>
-                                    <HBox alignment="CENTER" prefHeight="527.0" prefWidth="732.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <children>
-                                          <ChoiceBox fx:id="selectUser" prefHeight="30.0" prefWidth="228.0" styleClass="default-theme" stylesheets="@Style.css" />
-                                          <Button fx:id="dropBtn" mnemonicParsing="false" onAction="#dropBtnAction" prefHeight="30.0" prefWidth="122.0" styleClass="blue-theme" text="检索所有用户" />
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </AnchorPane>
-                          </content>
-                        </Tab>
-                    </tabs>
-                  </TabPane>
+                  <VBox fx:id="userManage" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="8.0" visible="false">
+                     <children>
+                        <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../sketch/用户_48.png" />
+                           </image>
+                        </ImageView>
+                        <JFXTreeTableView prefHeight="400.0" prefWidth="715.0">
+                           <columns>
+                              <TreeTableColumn prefWidth="68.0" text="编号" />
+                              <TreeTableColumn prefWidth="82.0" text="姓名" />
+                              <TreeTableColumn prefWidth="75.0" text="部门编号" />
+                              <TreeTableColumn prefWidth="75.0" text="性别" />
+                              <TreeTableColumn prefWidth="75.0" text="住址" />
+                              <TreeTableColumn prefWidth="75.0" text="电话" />
+                              <TreeTableColumn prefWidth="75.0" text="奖惩情况" />
+                              <TreeTableColumn prefWidth="75.0" text="职位" />
+                           </columns>
+                           <columnResizePolicy>
+                              <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </JFXTreeTableView>
+                        <HBox alignment="CENTER" prefHeight="32.0" prefWidth="715.0" spacing="8.0">
+                           <children>
+                              <JFXButton prefHeight="32.0" prefWidth="64.0" text="查看">
+                                 <styleClass>
+                                    <String fx:value="btn-basic" />
+                                    <String fx:value="blue-theme" />
+                                 </styleClass>
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXButton prefHeight="32.0" prefWidth="64.0" text="添加">
+                                 <styleClass>
+                                    <String fx:value="btn-basic" />
+                                    <String fx:value="blue-theme" />
+                                 </styleClass>
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXButton prefHeight="32.0" prefWidth="64.0" text="编辑">
+                                 <styleClass>
+                                    <String fx:value="btn-basic" />
+                                    <String fx:value="blue-theme" />
+                                 </styleClass>
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXButton prefHeight="32.0" prefWidth="64.0" text="删除">
+                                 <styleClass>
+                                    <String fx:value="btn-basic" />
+                                    <String fx:value="blue-theme" />
+                                 </styleClass>
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </JFXButton>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox fx:id="department" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="8.0" visible="false">
+                     <children>
+                        <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../sketch/部门.png" />
+                           </image>
+                        </ImageView>
+                        <JFXTreeTableView prefHeight="400.0" prefWidth="715.0">
+                           <columns>
+                              <TreeTableColumn prefWidth="75.0" text="部门编号" />
+                              <TreeTableColumn prefWidth="75.0" text="部门名称" />
+                              <TreeTableColumn prefWidth="75.0" text="部门经理" />
+                           </columns>
+                           <columnResizePolicy>
+                              <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </JFXTreeTableView>
+                        <HBox alignment="CENTER" prefHeight="32.0" prefWidth="715.0" spacing="8.0">
+                           <children>
+                              <JFXCheckBox prefHeight="24.0" prefWidth="96.0" text="是否可编辑">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </JFXCheckBox>
+                              <JFXButton prefHeight="32.0" prefWidth="64.0" text="添加">
+                                 <styleClass>
+                                    <String fx:value="btn-basic" />
+                                    <String fx:value="green-theme" />
+                                 </styleClass>
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXButton prefHeight="32.0" prefWidth="64.0" text="保存">
+                                 <styleClass>
+                                    <String fx:value="btn-basic" />
+                                    <String fx:value="green-theme" />
+                                 </styleClass>
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXButton prefHeight="32.0" prefWidth="64.0" text="删除">
+                                 <styleClass>
+                                    <String fx:value="btn-basic" />
+                                    <String fx:value="green-theme" />
+                                 </styleClass>
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </JFXButton>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox fx:id="salary" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="8.0" visible="false">
+                     <children>
+                        <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../sketch/工资管理.png" />
+                           </image>
+                        </ImageView>
+                        <JFXTreeTableView editable="true" prefHeight="400.0" prefWidth="715.0">
+                           <columns>
+                              <TreeTableColumn prefWidth="75.0" text="编号" />
+                              <TreeTableColumn prefWidth="75.0" text="姓名" />
+                              <TreeTableColumn prefWidth="75.0" text="底薪" />
+                              <TreeTableColumn prefWidth="75.0" text="奖金" />
+                              <TreeTableColumn prefWidth="75.0" text="补贴" />
+                              <TreeTableColumn prefWidth="75.0" text="加班" />
+                              <TreeTableColumn prefWidth="75.0" text="医疗保险" />
+                              <TreeTableColumn prefWidth="75.0" text="实发工资" />
+                              <TreeTableColumn prefWidth="75.0" text="月份" />
+                           </columns>
+                           <columnResizePolicy>
+                              <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </JFXTreeTableView>
+                        <HBox alignment="CENTER" prefHeight="32.0" prefWidth="715.0" spacing="8.0">
+                           <children>
+                              <JFXButton prefHeight="32.0" prefWidth="64.0" text="添加">
+                                 <styleClass>
+                                    <String fx:value="green-theme" />
+                                    <String fx:value="btn-basic" />
+                                 </styleClass>
+                              </JFXButton>
+                              <JFXButton prefHeight="32.0" prefWidth="64.0" text="保存">
+                                 <styleClass>
+                                    <String fx:value="btn-basic" />
+                                    <String fx:value="green-theme" />
+                                 </styleClass>
+                              </JFXButton>
+                              <JFXButton prefHeight="32.0" prefWidth="64.0" text="删除">
+                                 <styleClass>
+                                    <String fx:value="btn-basic" />
+                                    <String fx:value="green-theme" />
+                                 </styleClass>
+                              </JFXButton>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox fx:id="attendance" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="8.0" visible="false">
+                     <children>
+                        <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../sketch/考勤.png" />
+                           </image>
+                        </ImageView>
+                        <JFXTreeTableView prefHeight="400.0" prefWidth="715.0">
+                           <columns>
+                              <TreeTableColumn prefWidth="75.0" text="编号" />
+                              <TreeTableColumn prefWidth="75.0" text="姓名" />
+                              <TreeTableColumn prefWidth="75.0" text="月份" />
+                              <TreeTableColumn prefWidth="75.0" text="本月天数" />
+                              <TreeTableColumn prefWidth="75.0" text="应休天数" />
+                              <TreeTableColumn prefWidth="75.0" text="总天数" />
+                              <TreeTableColumn prefWidth="75.0" text="出勤" />
+                              <TreeTableColumn prefWidth="75.0" text="旷工" />
+                           </columns>
+                           <columnResizePolicy>
+                              <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </JFXTreeTableView>
+                        <HBox alignment="CENTER" prefHeight="32.0" prefWidth="715.0" spacing="8.0">
+                           <children>
+                              <JFXButton prefHeight="32.0" prefWidth="64.0" text="添加">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                                 <styleClass>
+                                    <String fx:value="btn-basic" />
+                                    <String fx:value="blue-theme" />
+                                 </styleClass>
+                              </JFXButton>
+                              <JFXButton prefHeight="32.0" prefWidth="64.0" text="保存">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                                 <styleClass>
+                                    <String fx:value="btn-basic" />
+                                    <String fx:value="blue-theme" />
+                                 </styleClass>
+                              </JFXButton>
+                              <JFXButton prefHeight="32.0" prefWidth="64.0" text="删除">
+                                 <styleClass>
+                                    <String fx:value="btn-basic" />
+                                    <String fx:value="blue-theme" />
+                                 </styleClass>
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </JFXButton>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox fx:id="createUser" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" visible="false">
+                     <children>
+                        <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../sketch/添加用户.png" />
+                           </image>
+                        </ImageView>
+                        <HBox alignment="CENTER" prefHeight="32.0" prefWidth="732.0" spacing="10.0">
+                           <children>
+                              <Label prefHeight="24.0" prefWidth="64.0" text="用户名称:">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                              <JFXTextField fx:id="username" focusColor="#609adc" prefHeight="24.0" prefWidth="160.0" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="32.0" prefWidth="732.0" spacing="10.0">
+                           <children>
+                              <Label prefHeight="24.0" prefWidth="64.0" text="用户密码:">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                              <JFXPasswordField fx:id="password" focusColor="#11be73" prefHeight="24.0" prefWidth="160.0" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="32.0" prefWidth="732.0" spacing="10.0">
+                           <children>
+                              <Label prefHeight="24.0" prefWidth="64.0" text="确认密码:">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                              <JFXPasswordField fx:id="password2" focusColor="#11be73" prefHeight="24.0" prefWidth="160.0" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="32.0" prefWidth="732.0" spacing="8.0">
+                           <children>
+                              <JFXButton fx:id="createAdmin" onAction="#createAdminAction" prefHeight="32.0" prefWidth="104.0" text="创建管理员">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                                 <styleClass>
+                                    <String fx:value="btn-basic" />
+                                    <String fx:value="warning-theme" />
+                                 </styleClass>
+                              </JFXButton>
+                              <JFXButton fx:id="createUserBtn2" onAction="#createUserBtn2Action" prefHeight="32.0" prefWidth="104.0" text="创建用户">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                                 <styleClass>
+                                    <String fx:value="btn-basic" />
+                                    <String fx:value="warm-theme" />
+                                 </styleClass>
+                              </JFXButton>
+                              <JFXButton fx:id="reset" onAction="#resetAction" prefHeight="32.0" prefWidth="64.0" text="重置">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                                 <styleClass>
+                                    <String fx:value="btn-basic" />
+                                    <String fx:value="gray-theme" />
+                                 </styleClass>
+                              </JFXButton>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox fx:id="modifyPassword" alignment="CENTER" prefHeight="527.0" prefWidth="732.0" spacing="10.0" visible="false">
+                     <children>
+                        <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../sketch/修改密码.png" />
+                           </image>
+                        </ImageView>
+                        <HBox alignment="CENTER" prefHeight="32.0" prefWidth="732.0" spacing="10.0">
+                           <children>
+                              <JFXPasswordField fx:id="oldPassword" focusColor="#2a80d5" prefHeight="24.0" prefWidth="160.0" promptText="请输入原密码" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="32.0" prefWidth="732.0" spacing="10.0">
+                           <children>
+                              <JFXPasswordField fx:id="newPassword" focusColor="#c12f37" prefHeight="24.0" prefWidth="160.0" promptText="请输入新密码" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="32.0" prefWidth="732.0" spacing="10.0">
+                           <children>
+                              <JFXPasswordField fx:id="newPassword2" focusColor="#c12f37" prefHeight="24.0" prefWidth="160.0" promptText="请再次输入新密码" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="32.0" prefWidth="732.0" spacing="8.0">
+                           <children>
+                              <JFXButton fx:id="confirmChange" onAction="#confirmAction" prefHeight="32.0" prefWidth="88.0" text="确认修改">
+                                 <styleClass>
+                                    <String fx:value="btn-basic" />
+                                    <String fx:value="green-theme" />
+                                 </styleClass>
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXButton fx:id="reset2" onAction="#reset2Action" prefHeight="32.0" prefWidth="64.0" text="重置">
+                                 <styleClass>
+                                    <String fx:value="btn-basic" />
+                                    <String fx:value="green-theme" />
+                                 </styleClass>
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </JFXButton>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox fx:id="dropUser">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="527.0" prefWidth="732.0" spacing="8.0">
+                           <children>
+                              <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../sketch/删除用户.png" />
+                                 </image>
+                              </ImageView>
+                              <JFXComboBox fx:id="selectUserCombobox" focusColor="#4b8bf4" prefHeight="32.0" prefWidth="240.0" />
+                              <JFXButton fx:id="dropBtn" onAction="#dropBtnAction" prefHeight="32.0" prefWidth="80.0" styleClass="green-theme" text="检索用户">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </JFXButton>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
                </children>
             </StackPane>
         </items>

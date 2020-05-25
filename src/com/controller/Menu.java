@@ -2,8 +2,9 @@ package com.controller;
 
 import com.AlertDiaog;
 import com.Sql;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXPasswordField;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -11,34 +12,50 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Menu implements Initializable {
 
-    public BorderPane rootLayout;
-    public Label userLabel;
-    public Button exit;
-    public TabPane tabPane3;
+    public final int totalLayout = 6;   //管理页面总数
+
+    public BorderPane rootLayout;   //布局的父目录
+    public VBox userManage; //员工管理页面
+    public VBox department; //部门管理页面
+    public VBox salary; //薪资管理页面
+    public VBox attendance; //考勤管理页面
+    public VBox createUser; //创建用户页面
+    public VBox modifyPassword; //修改密码页面
+    public VBox dropUser;   //删除用户页面
+    List<VBox> VBoxList;    //页面管理List
+    public Label userLabel; //
+    public JFXButton userManageBtn; //员工管理按钮
+    public JFXButton departmentBtn; //部门管理按钮
+    public JFXButton salaryBtn; //薪资管理按钮
+    public JFXButton attendanceBtn; //考勤管理按钮
+    public JFXButton exit;  //退出系统按钮
+    public JFXButton dropBtn;   //删除用户按钮
     public TextField username;
-    public PasswordField password;
-    public PasswordField password2;
-    public PasswordField oldPassword;
-    public PasswordField newPassword;
-    public PasswordField newPassword2;
-    public ChoiceBox selectUser;
-    public Button dropBtn;
+    public JFXPasswordField password;
+    public JFXPasswordField password2;
+    public JFXPasswordField oldPassword;
+    public JFXPasswordField newPassword;
+    public JFXPasswordField newPassword2;
+    public JFXComboBox selectUserCombobox;
+
     public int dropBtnStatus = 0;
     public Stage primaryStage;
-    public SingleSelectionModel singleSelectionModel;
     public String[] info;
     public Connection connection;
     public Statement statement;
@@ -49,26 +66,26 @@ public class Menu implements Initializable {
 
     //初始化
     public void init(){
-        singleSelectionModel = tabPane3.getSelectionModel();
-        singleSelectionModel.selectedIndexProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
-                dropBtn.setText("检索所有用户");
-                dropBtn.setStyle("-fx-background-color: rgb(30, 158, 255); -fx-text-fill: #fff;");
-                dropBtnStatus = 0;
-            }
-        });
         primaryStage = (Stage) rootLayout.getScene().getWindow();   //获取本窗口的Stage实例
         info = (String[]) primaryStage.getUserData();   //info保存登录进来的用户名和密码
         userLabel.setText("尊敬的"+info[0]+", 您好!");
-        tabPane3.setVisible(false);
+        VBoxList = new ArrayList<>();
+        VBoxList.add(userManage);
+        VBoxList.add(department);
+        VBoxList.add(salary);
+        VBoxList.add(attendance);
+        VBoxList.add(createUser);
+        VBoxList.add(modifyPassword);
+        VBoxList.add(dropUser);
+        for (int i = 0; i<=totalLayout; i++)
+            VBoxList.get(i).setVisible(false);
     }
 
     //退出系统按钮,返回主菜单
     public void exitAction(ActionEvent actionEvent) {
         try {
             Stage stage = new Stage();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/fxml/Login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/fxml/Login_MD.fxml"));
             Parent parent = loader.load();
             stage.setScene(new Scene(parent));
             Login login = loader.getController();
@@ -76,6 +93,7 @@ public class Menu implements Initializable {
             login.username.setText(info[0]);
             login.password.requestFocus();
             stage.setTitle("人事管理系统");
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/sketch/管理_24.png")));
             stage.show();
             primaryStage.close();
         }catch (Exception e){
@@ -83,22 +101,46 @@ public class Menu implements Initializable {
         }
     }
 
+    //左侧菜单栏员工管理按钮
+    public void userManageBtnAction(ActionEvent actionEvent) {
+        setLayoutVisible(0);
+        resetDropBtn();
+    }
+
+    //左侧菜单栏部门管理按钮
+    public void departmentBtnAction(ActionEvent actionEvent){
+        setLayoutVisible(1);
+        resetDropBtn();
+    }
+
+    //左侧菜单栏工资管理按钮
+    public void salaryBtnAction(ActionEvent actionEvent) {
+        setLayoutVisible(2);
+        resetDropBtn();
+    }
+
+    //左侧菜单栏考勤管理按钮
+    public void attendanceBtnAction(ActionEvent actionEvent) {
+        setLayoutVisible(3);
+        resetDropBtn();
+    }
+
     //左侧菜单栏创建用户按钮
     public void createUserBtnAction(ActionEvent actionEvent) {
-        setTabPane3Visible();
-        singleSelectionModel.select(0);
+        setLayoutVisible(4);
+        resetDropBtn();
     }
 
     //左侧菜单栏修改密码按钮
     public void modifyPasswordBtnAction(ActionEvent actionEvent) {
-        setTabPane3Visible();
-        singleSelectionModel.select(1);
+        setLayoutVisible(5);
+        resetDropBtn();
     }
 
     //左侧菜单栏删除用户按钮
     public void deleteUserBtnAction(ActionEvent actionEvent) {
-        setTabPane3Visible();
-        singleSelectionModel.select(2);
+        setLayoutVisible(6);
+        resetDropBtn();
     }
 
     //右侧密码修改页重置按钮
@@ -116,7 +158,7 @@ public class Menu implements Initializable {
     }
 
     //右侧创建用户页创建普通用户按钮
-    public void createUserAction(ActionEvent actionEvent) {
+    public void createUserBtn2Action(ActionEvent actionEvent) {
         //用户名,密码均不为空且输入的两个密码的值相等
         if (verifyText(username.getText(), password.getText(), password2.getText())){
             connection = Sql.connect(info[0], info[1]);
@@ -186,12 +228,6 @@ public class Menu implements Initializable {
         }
     }
 
-    public void setTabPane3Visible(){
-        if (!tabPane3.isVisible()) {
-            tabPane3.setVisible(true);
-        }
-    }
-
     //删除用户按钮
     public void dropBtnAction(ActionEvent actionEvent) {
         try {
@@ -199,7 +235,7 @@ public class Menu implements Initializable {
                 connection = Sql.connect(info[0], info[1]);
                 statement = Sql.getStatement(connection);
                 dropBtnStatus = 1;
-                dropBtn.setText("删除这个用户");
+                dropBtn.setText("删除");
                 dropBtn.setStyle("-fx-background-color: rgb(254, 87, 34); -fx-text-fill: #fff;");
                 String sql = "SELECT USER FROM mysql.user;";
                 ResultSet resultSet = Sql.query(statement, sql);
@@ -211,22 +247,21 @@ public class Menu implements Initializable {
                     if (!matcher.matches())
                         users.add(user);
                 }
-                selectUser.setItems(FXCollections.observableArrayList(users));
+                selectUserCombobox.setItems(FXCollections.observableArrayList(users));
                 Sql.disconnect(connection);
+
             }else if (dropBtnStatus == 1){
-                if (selectUser.getValue() == null){
+                if (selectUserCombobox.getValue() == null){
                     AlertDiaog.alert(0, "错误", "你没有选中任何用户");
                 }else{
                     connection = Sql.connect(info[0], info[1]);
                     statement = Sql.getStatement(connection);
-                    String sql = "DROP USER '" + selectUser.getValue() +"';";
+                    String sql = "DROP USER '" + selectUserCombobox.getValue() +"';";
                     if (Sql.operate(statement, sql))
                         AlertDiaog.alert(3, "成功", "成功删除用户");
                     else
                         AlertDiaog.alert(0, "失败", "删除用户失败", "用户已不存在或你没有权限");
-                    dropBtn.setText("检索所有用户");
-                    dropBtn.setStyle("-fx-background-color: rgb(30, 158, 255); -fx-text-fill: #fff;");
-                    dropBtnStatus = 0;
+                    resetDropBtn();
                     Sql.disconnect(connection);
                 }
             }
@@ -234,4 +269,20 @@ public class Menu implements Initializable {
             e.printStackTrace();
         }
     }
+
+    public void resetDropBtn(){
+        dropBtn.setText("检索用户");
+        dropBtn.setStyle("-fx-background-color: rgb(30, 158, 255); -fx-text-fill: #fff;");
+        dropBtnStatus = 0;
+    }
+
+    public void setLayoutVisible(int id){
+        VBoxList.get(id).setVisible(true);
+        for (int i=0 ; i<=6 ; i++){
+            if (i == id)
+                continue;
+            VBoxList.get(i).setVisible(false);
+        }
+    }
+
 }
